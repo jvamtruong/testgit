@@ -11,20 +11,20 @@ long long base[13] = {2, 3, 5, 7, 11, 13, 17, 19, 23};
 int min_prime[MAX + 3];
 
 void sieve() {
-	for (int i = 2 ; i <= sqrt(MAX); i++) {
-		if (min_prime[i] == 0) {
-			for (int j = i * i ; j <= MAX; j += i) {
-				if (min_prime[j] == 0) {
-					min_prime[j] = i;
-				}
-			}
-		}
-	}
-	for (int i = 2 ; i <= MAX; i++) if (min_prime[i] == 0) min_prime[i] = i;
+    for (int i = 2 ; i <= sqrt(MAX); i++) {
+        if (min_prime[i] == 0) {
+            for (int j = i * i ; j <= MAX; j += i) {
+                if (min_prime[j] == 0) {
+                    min_prime[j] = i;
+                }
+            }
+        }
+    }
+    for (int i = 2 ; i <= MAX; i++) if (min_prime[i] == 0) min_prime[i] = i;
 }
 
 long long gcd(long long a, long long b) {
-	return b ? gcd(b, a % b) : a;
+    return b ? gcd(b, a % b) : a;
 }
 
 long long mul_mod(long long a, long long b, long long MOD) {
@@ -83,20 +83,20 @@ bool miller(long long n) {
 }
 
 long long pollard_rho(long long n) {
-	if (n == 1) return 1;
-	if (n % 2 == 0) return 2;
-	long long x = rand() % (n - 2) + 2;
-	long long y = x;
-	long long c = rand() % (n - 1) + 1;
-	long long d = 1;
-	while (d == 1) {
-		x = (x * x % n + c + n) % n;
-		y = (y * y % n + c + n) % n;
-		y = (y * y % n + c + n) % n;
-		d = gcd(abs(x - y), n);
-		if (d == n) return pollard_rho(n);
-	}
-	return d;
+    if (n == 1) return 1;
+    if (n % 2 == 0) return 2;
+    long long x = rand() % (n - 2) + 2;
+    long long y = x;
+    long long c = rand() % (n - 1) + 1;
+    long long d = 1;
+    while (d == 1) {
+        x = (x * x % n + c + n) % n;
+        y = (y * y % n + c + n) % n;
+        y = (y * y % n + c + n) % n;
+        d = gcd(abs(x - y), n);
+        if (d == n) return pollard_rho(n);
+    }
+    return d;
 }
 
 int main() {
@@ -107,29 +107,29 @@ int main() {
     int t;
     cin >> t;
     while (t--) {
-    	long long n;
-		cin >> n;
-		long long cur = n;
-		long long ans = 1;
-		for (int i = 2 ; i <= sqrt(n); i++) {
-	    	int cnt = 0;
-	    	if (n % i == 0) {
-				while (n % i == 0) {
-					cnt++;
-					n /= i;
-				}
-				ans *= (fpow(i, cnt + 1) - 1) / (i - 1);
-			}
-			if (i > (int) 1E6) break;
-		}
-		if (n > 1) {
-			if (miller(n)) ans *= (fpow(n, 2) - 1) / (n - 1);
-			else {
-				long long p1 = pollard_rho(n);
-				long long p2 = n / p1;
-				ans *= ((fpow(p1, 2) - 1) / (p1 - 1)) * ((fpow(p2, 2) - 1) / (p2 - 1));
-			}
-		}
-		cout << (ans == 2 * cur) << endl;
-	}
+        long long n;
+        cin >> n;
+        long long cur = n;
+        long long ans = 1;
+        for (int i = 2 ; i <= sqrt(n); i++) {
+            int cnt = 0;
+            if (n % i == 0) {
+                while (n % i == 0) {
+                    cnt++;
+                    n /= i;
+                }
+                ans *= (fpow(i, cnt + 1) - 1) / (i - 1);
+            }
+            if (i > (int) 1E6) break;
+        }
+        if (n > 1) {
+            if (miller(n)) ans *= (fpow(n, 2) - 1) / (n - 1);
+            else {
+                long long p1 = pollard_rho(n);
+                long long p2 = n / p1;
+                ans *= ((fpow(p1, 2) - 1) / (p1 - 1)) * ((fpow(p2, 2) - 1) / (p2 - 1));
+            }
+        }
+        cout << (ans == 2 * cur) << endl;
+    }
 }
