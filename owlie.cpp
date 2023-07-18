@@ -100,20 +100,20 @@ long long pollard_rho(long long n) {
 }
 
 int main() {
-	ios_base::sync_with_stdio(0);
+    ios_base::sync_with_stdio(0);
     cin.tie(0);
     srand(time(NULL));
-	sieve();
-	int t;
-	cin >> t;
-	while (t--) {
-		long long n;
+    sieve();
+    int t;
+    cin >> t;
+    while (t--) {
+    	long long n;
 		cin >> n;
 		long long cur = n;
 		long long ans = 1;
 		for (int i = 2 ; i <= sqrt(n); i++) {
-			int cnt = 0;
-			if (n % i == 0) {
+	    	int cnt = 0;
+	    	if (n % i == 0) {
 				while (n % i == 0) {
 					cnt++;
 					n /= i;
