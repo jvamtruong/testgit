@@ -1,6 +1,6 @@
 sfdf
-dfdf new new |||
+dfdf new new ||
 f----
 fourth line
-fifth abc zzzzz
-6666666666
+fifth abc z
+6666666
